@@ -26,48 +26,48 @@ namespace AnimalShelter.Controllers
       this.uriService = uriService;
     }
     // GET api/animals by query
-    // [HttpGet]
-    // public ActionResult<IEnumerable<Animal>> Get(string energyLevel, string size, string getsAlongWith, string type, string breed, string age, string disposition, string coloring)
-    // {
-    //   var query = _db.Animals.AsQueryable();
+    [HttpGet("search")]
+    public ActionResult<IEnumerable<Animal>> Get(string energyLevel, string size, string getsAlongWith, string type, string breed, string age, string disposition, string coloring)
+    {
+      var query = _db.Animals.AsQueryable();
 
-    //   if (energyLevel != null)
-    //   {
-    //     query = query.Where(entry => entry.EnergyLevel.Contains(energyLevel));
-    //   }
-    //   if (size != null)
-    //   {
-    //     query = query.Where(entry => entry.Size.Contains(size));
-    //   }
-    //   if (getsAlongWith != null)
-    //   {
-    //     query = query.Where(entry => entry.GetsAlongWith.Contains(getsAlongWith));
-    //   }
-    //   if (type != null)
-    //   {
-    //     query = query.Where(entry => entry.Type.Contains(type));
-    //   }
-    //   if (breed != null)
-    //   {
-    //     query = query.Where(entry => entry.Breed.Contains(breed));
-    //   }
-    //   if (age != null)
-    //   {
-    //     query = query.Where(entry => entry.Age.Contains(age));
-    //   }
-    //   if (disposition != null)
-    //   {
-    //     query = query.Where(entry => entry.Disposition.Contains(disposition));
-    //   }
-    //   if (coloring != null)
-    //   {
-    //     query = query.Where(entry => entry.Coloring.Contains(coloring));
-    //   }
+      if (energyLevel != null)
+      {
+        query = query.Where(entry => entry.EnergyLevel.Contains(energyLevel));
+      }
+      if (size != null)
+      {
+        query = query.Where(entry => entry.Size.Contains(size));
+      }
+      if (getsAlongWith != null)
+      {
+        query = query.Where(entry => entry.GetsAlongWith.Contains(getsAlongWith));
+      }
+      if (type != null)
+      {
+        query = query.Where(entry => entry.Type.Contains(type));
+      }
+      if (breed != null)
+      {
+        query = query.Where(entry => entry.Breed.Contains(breed));
+      }
+      if (age != null)
+      {
+        query = query.Where(entry => entry.Age.Contains(age));
+      }
+      if (disposition != null)
+      {
+        query = query.Where(entry => entry.Disposition.Contains(disposition));
+      }
+      if (coloring != null)
+      {
+        query = query.Where(entry => entry.Coloring.Contains(coloring));
+      }
 
-    //   return query.ToList();
-    // }
+      return query.ToList();
+    }
 
-    [HttpGet] //Get results by page
+    [HttpGet("")] //Get results by page
     public IActionResult GetAll([FromQuery] PaginationFilter filter)
     {
       var route = Request.Path.Value;
