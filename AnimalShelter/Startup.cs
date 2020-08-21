@@ -31,7 +31,7 @@ namespace AnimalShelter
           builder =>
           {
             builder.WithOrigins("http://example.com",
-                                  "http://www.google.com")
+                                  "https://localhost:4000")
                                   .AllowAnyHeader()
                                   .AllowAnyMethod();
           });
