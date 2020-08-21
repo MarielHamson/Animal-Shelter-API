@@ -17,46 +17,58 @@ namespace AnimalShelter.Controllers
     {
       _db = db;
     }
-    // GET api/animals
-    [HttpGet]
-    public ActionResult<IEnumerable<Animal>> Get(string energyLevel, string size, string getsAlongWith, string type, string breed, string age, string disposition, string coloring)
+    // GET api/animals by query
+    // [HttpGet]
+    // public ActionResult<IEnumerable<Animal>> Get(string energyLevel, string size, string getsAlongWith, string type, string breed, string age, string disposition, string coloring)
+    // {
+    //   var query = _db.Animals.AsQueryable();
+
+    //   if (energyLevel != null)
+    //   {
+    //     query = query.Where(entry => entry.EnergyLevel.Contains(energyLevel));
+    //   }
+    //   if (size != null)
+    //   {
+    //     query = query.Where(entry => entry.Size.Contains(size));
+    //   }
+    //   if (getsAlongWith != null)
+    //   {
+    //     query = query.Where(entry => entry.GetsAlongWith.Contains(getsAlongWith));
+    //   }
+    //   if (type != null)
+    //   {
+    //     query = query.Where(entry => entry.Type.Contains(type));
+    //   }
+    //   if (breed != null)
+    //   {
+    //     query = query.Where(entry => entry.Breed.Contains(breed));
+    //   }
+    //   if (age != null)
+    //   {
+    //     query = query.Where(entry => entry.Age.Contains(age));
+    //   }
+    //   if (disposition != null)
+    //   {
+    //     query = query.Where(entry => entry.Disposition.Contains(disposition));
+    //   }
+    //   if (coloring != null)
+    //   {
+    //     query = query.Where(entry => entry.Coloring.Contains(coloring));
+    //   }
+
+    //   return query.ToList();
+    // }
+
+    [HttpGet] //Get results by page
+    public IActionResult GetAll([FromQuery] PaginationFilter filter)
     {
-      var query = _db.Animals.AsQueryable();
-
-      if (energyLevel != null)
-      {
-        query = query.Where(entry => entry.EnergyLevel.Contains(energyLevel));
-      }
-      if (size != null)
-      {
-        query = query.Where(entry => entry.Size.Contains(size));
-      }
-      if (getsAlongWith != null)
-      {
-        query = query.Where(entry => entry.GetsAlongWith.Contains(getsAlongWith));
-      }
-      if (type != null)
-      {
-        query = query.Where(entry => entry.Type.Contains(type));
-      }
-      if (breed != null)
-      {
-        query = query.Where(entry => entry.Breed.Contains(breed));
-      }
-      if (age != null)
-      {
-        query = query.Where(entry => entry.Age.Contains(age));
-      }
-      if (disposition != null)
-      {
-        query = query.Where(entry => entry.Disposition.Contains(disposition));
-      }
-      if (coloring != null)
-      {
-        query = query.Where(entry => entry.Coloring.Contains(coloring));
-      }
-
-      return query.ToList();
+      var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+      var pagedData = _db.Yogurts.ToList()
+        .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+        .Take(validFilter.PageSize)
+        .ToList();
+      var totalRecords = _db.Yogurts.Count();
+      return Ok(new PagedResponse<List<Yogurt>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
     }
 
     // GET api/animals/5
