@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimalShelter.Models;
 using AnimalShelter.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace AnimalShelter.Controllers
@@ -90,6 +91,7 @@ namespace AnimalShelter.Controllers
 
     // POST api/animals
     [HttpPost]
+    [Authorize]
     public void Post([FromBody] Animal animal)
     {
       _db.Animals.Add(animal);
@@ -98,6 +100,7 @@ namespace AnimalShelter.Controllers
 
     // PUT api/animals/5
     [HttpPut("{id}")]
+    [Authorize]
     public void Put(int id, [FromBody] Animal animal)
     {
       animal.AnimalId = id;
@@ -107,6 +110,7 @@ namespace AnimalShelter.Controllers
 
     // DELETE api/animals/5
     [HttpDelete("{id}")]
+    [Authorize]
     public void Delete(int id)
     {
       var animalToDelete = _db.Animals.FirstOrDefault(entry => entry.AnimalId == id);

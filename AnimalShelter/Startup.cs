@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Okta.AspNet;
+
 
 
 namespace AnimalShelter
@@ -27,6 +29,13 @@ namespace AnimalShelter
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(options =>
+      {
+        options.Authority = "https://dev-301956.okta.com/oauth2/default";
+        options.Audience = "localhost//:5004";
+        options.RequireHttpsMetadata = false;
+      });
 
       services.AddDbContext<AnimalShelterContext>(opt =>
           opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
@@ -48,6 +57,10 @@ namespace AnimalShelter
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+      // app.UseOktaWebApi(new OktaWebApiOptions()
+      // {
+      //   OktaDomain = "https://dev-301956.okta.com/oauth2/default",
+      // });
       app.UseSwagger();
       app.UseSwaggerUI(c =>
     {
@@ -67,6 +80,7 @@ namespace AnimalShelter
       }
 
       // app.UseHttpsRedirection();
+      app.UseAuthentication();
       app.UseMvc();
     }
   }
