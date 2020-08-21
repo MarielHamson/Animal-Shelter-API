@@ -47,6 +47,9 @@ namespace AnimalShelter
       services.AddDbContext<AnimalShelterContext>(opt =>
           opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
           b => b.MigrationsAssembly(typeof(AnimalShelterContext).Assembly.FullName)));
+      services.AddDbContext<AnimalShelterContext>(opt =>
+          opt.UseInMemoryDatabase("AnimalShelter"));
+      services.AddSwaggerGen();
       services.AddHttpContextAccessor();
       services.AddSingleton<IUriService>(o =>
       {
@@ -88,7 +91,13 @@ namespace AnimalShelter
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+      app.UseSwagger();
+      app.UseSwaggerUI(c =>
+    {
+      c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+      c.RoutePrefix = string.Empty;
 
+    });
       // app.UseAuthentication();
       if (env.IsDevelopment())
       {
