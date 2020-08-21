@@ -30,7 +30,8 @@
 
 Stretch Goals:
 
-- Implement tokenization and CORS
+- Implement tokenization
+- CORS (Done!)
 
 ## How To Use
 

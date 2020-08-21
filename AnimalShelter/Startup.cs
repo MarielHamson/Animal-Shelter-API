@@ -18,11 +18,24 @@ namespace AnimalShelter
       Configuration = configuration;
     }
 
+    readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddCors(options =>
+        {
+          options.AddPolicy(MyAllowSpecificOrigins,
+          builder =>
+          {
+            builder.WithOrigins("http://example.com",
+                                  "http://www.google.com")
+                                  .AllowAnyHeader()
+                                  .AllowAnyMethod();
+          });
+        });
 
       services.AddDbContext<AnimalShelterContext>(opt =>
           opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
@@ -62,6 +75,7 @@ namespace AnimalShelter
         app.UseHsts();
       }
 
+      app.UseCors(MyAllowSpecificOrigins);
       // app.UseHttpsRedirection();
       app.UseMvc();
     }
