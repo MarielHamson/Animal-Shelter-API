@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-// using AnimalShelter.Helpers;
-// using AnimalShelter.Services;
+using AnimalShelter.Helpers;
+using AnimalShelter.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
@@ -37,8 +38,18 @@ namespace AnimalShelter
       });
 
 
+
       services.AddDbContext<AnimalShelterContext>(opt =>
-          opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+          opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+          b => b.MigrationsAssembly(typeof(AnimalShelterContext).Assembly.FullName)));
+      services.AddHttpContextAccessor();
+      services.AddSingleton<IUriService>(o =>
+      {
+        var accessor = o.GetRequiredService<IHttpContextAccessor>();
+        var request = accessor.HttpContext.Request;
+        var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+        return new UriService(uri);
+      });
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
       // var appSettingsSection = Configuration.GetSection("AppSettings");

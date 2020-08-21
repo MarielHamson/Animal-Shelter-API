@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimalShelter.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimalShelter.Models;
+using AnimalShelter.Services;
+
 
 namespace AnimalShelter.Controllers
 {
@@ -13,9 +16,14 @@ namespace AnimalShelter.Controllers
   public class AnimalsController : ControllerBase
   {
     private AnimalShelterContext _db;
-    public AnimalsController(AnimalShelterContext db)
+    private readonly AnimalShelterContext context;
+    private readonly IUriService uriService;
+    public AnimalsController(AnimalShelterContext db, IUriService uriService, AnimalShelterContext context)
+
     {
       _db = db;
+      this.context = context;
+      this.uriService = uriService;
     }
     // GET api/animals by query
     // [HttpGet]
@@ -62,13 +70,15 @@ namespace AnimalShelter.Controllers
     [HttpGet] //Get results by page
     public IActionResult GetAll([FromQuery] PaginationFilter filter)
     {
+      var route = Request.Path.Value;
       var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-      var pagedData = _db.Yogurts.ToList()
+      var pagedData = _db.Animals.ToList()
         .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
         .Take(validFilter.PageSize)
         .ToList();
-      var totalRecords = _db.Yogurts.Count();
-      return Ok(new PagedResponse<List<Yogurt>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
+      var totalRecords = _db.Animals.Count();
+      var pagedResponse = PaginationHelper.CreatePagedResponse<Animal>(pagedData, validFilter, totalRecords, uriService, route);
+      return Ok(pagedResponse);
     }
 
     // GET api/animals/5
