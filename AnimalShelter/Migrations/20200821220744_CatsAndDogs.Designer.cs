@@ -2,187 +2,21 @@
 using AnimalShelter.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterContext))]
-    partial class AnimalShelterContextModelSnapshot : ModelSnapshot
+    [Migration("20200821220744_CatsAndDogs")]
+    partial class CatsAndDogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("AnimalShelter.Models.Animal", b =>
-                {
-                    b.Property<int>("AnimalId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Age")
-                        .IsRequired();
-
-                    b.Property<string>("Breed")
-                        .IsRequired();
-
-                    b.Property<string>("Coloring")
-                        .IsRequired();
-
-                    b.Property<string>("Disposition")
-                        .IsRequired();
-
-                    b.Property<string>("EnergyLevel")
-                        .IsRequired();
-
-                    b.Property<string>("GetsAlongWith")
-                        .IsRequired();
-
-                    b.Property<float>("NumOfFeet");
-
-                    b.Property<string>("Size")
-                        .IsRequired();
-
-                    b.Property<string>("Type")
-                        .IsRequired();
-
-                    b.HasKey("AnimalId");
-
-                    b.ToTable("Animals");
-
-                    b.HasData(
-                        new
-                        {
-                            AnimalId = 1,
-                            Age = "1",
-                            Breed = "Iguana",
-                            Coloring = "Yellow",
-                            Disposition = "super sweet",
-                            EnergyLevel = "High",
-                            GetsAlongWith = "Small dogs, children",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Lizard"
-                        },
-                        new
-                        {
-                            AnimalId = 2,
-                            Age = "4",
-                            Breed = "Oceanic",
-                            Coloring = "Black",
-                            Disposition = "super sweet but bitey",
-                            EnergyLevel = "Medium",
-                            GetsAlongWith = "Small dogs",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Octopus"
-                        },
-                        new
-                        {
-                            AnimalId = 3,
-                            Age = "7",
-                            Breed = "Chinese",
-                            Coloring = "speckled",
-                            Disposition = "lays around",
-                            EnergyLevel = "Low",
-                            GetsAlongWith = "Handler",
-                            NumOfFeet = 3f,
-                            Size = "Perfect",
-                            Type = "Red Panda"
-                        },
-                        new
-                        {
-                            AnimalId = 4,
-                            Age = "1",
-                            Breed = "Canary",
-                            Coloring = "Beige with Black muzzle",
-                            Disposition = "super sweet",
-                            EnergyLevel = "Slothlike",
-                            GetsAlongWith = "big dogs, friends",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Bird"
-                        },
-                        new
-                        {
-                            AnimalId = 5,
-                            Age = "6 months",
-                            Breed = "Potbelly",
-                            Coloring = "pink with black spots",
-                            Disposition = "wants cuddles forever",
-                            EnergyLevel = "Bouncy",
-                            GetsAlongWith = "Children",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Pig"
-                        },
-                        new
-                        {
-                            AnimalId = 6,
-                            Age = "3",
-                            Breed = "African",
-                            Coloring = "Yellow with spots",
-                            Disposition = "rough and tumble",
-                            EnergyLevel = "Chill",
-                            GetsAlongWith = "Small dogs, children",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Elephant"
-                        },
-                        new
-                        {
-                            AnimalId = 7,
-                            Age = "1",
-                            Breed = "Rattle",
-                            Coloring = "Grey/Silver",
-                            Disposition = "bouncey and happy",
-                            EnergyLevel = "Medium",
-                            GetsAlongWith = "Adults and random strangers",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Snake"
-                        },
-                        new
-                        {
-                            AnimalId = 8,
-                            Age = "5",
-                            Breed = "Loch Ness",
-                            Coloring = "pink and grey",
-                            Disposition = "loves to climb",
-                            EnergyLevel = "Med-Low",
-                            GetsAlongWith = "Small things",
-                            NumOfFeet = 3f,
-                            Size = "Perfect",
-                            Type = "Monster"
-                        },
-                        new
-                        {
-                            AnimalId = 9,
-                            Age = "7",
-                            Breed = "Red",
-                            Coloring = "white with brown spots, or is it brown with white spots",
-                            Disposition = "can be nice when food is available",
-                            EnergyLevel = "Highest",
-                            GetsAlongWith = "me",
-                            NumOfFeet = 4f,
-                            Size = "Perfect",
-                            Type = "Fox"
-                        },
-                        new
-                        {
-                            AnimalId = 10,
-                            Age = "10",
-                            Breed = "Roo",
-                            Coloring = "Yellow",
-                            Disposition = "loyal and honest",
-                            EnergyLevel = "Normal",
-                            GetsAlongWith = "Everyone",
-                            NumOfFeet = 2f,
-                            Size = "Perfect",
-                            Type = "Kangaroo"
-                        });
-                });
 
             modelBuilder.Entity("AnimalShelter.Models.Cat", b =>
                 {

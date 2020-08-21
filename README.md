@@ -34,7 +34,7 @@ Stretch Goals:
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [.NET Core 2.2](https://dotnet.microsoft.com/download) installed. If you wish to review the raw code, it's easiest to download a code editor such as Visual Studio Code or Atom. Additionally, you'll need [Postman]or similar(https://www.postman.com/downloads/) installed for querying the API but you can also navigate to https://localhost//:5004/api/animals for raw data after running the program.
+To clone and run this application, you'll need [Git](https://git-scm.com), [.NET Core 2.2](https://dotnet.microsoft.com/download) installed. If you wish to review the raw code, it's easiest to download a code editor such as Visual Studio Code or Atom. Additionally, you'll need [Postman]or similar(https://www.postman.com/downloads/) installed for querying the API but you can also navigate to https://localhost:5004/ for documentation via Swagger.
 
 ## Import Database using MySQL Workbench
 
@@ -72,15 +72,17 @@ $ dotnet run
 
 ## Using Swagger Documentation
 
--- Use Swagger to explore the documentation of this API. Launch the project using `dotnet run` with Terminal and then input`http://localhost:5004` into your browser. See below for endpoints and parameters:
+-- Use Swagger to explore the documentation of this API. There are three endpoints, one for Cats, one for Dogs, and one for general Animals otherwise not mentioned. Launch the project using `dotnet run` with Terminal and then input`http://localhost:5004` into your browser. See below for endpoints and parameters:
 
-![Swagger implemented endpoints](img/swagger.png)
+![Swagger implemented endpoints](img/swagger_endpoints.png)
 
-![Swagger implemented parameters](img/swaggerparameters.png)
+![Swagger implemented parameters](img/swagger_parameters.png)
 
-Example Query:
+Example Queries:
 
 `http://localhost:5004/api/Animals/`
+`http://localhost:5004/api/Cats/`
+`http://localhost:5004/api/Dogs`
 
 ## A Note On Pagination
 
