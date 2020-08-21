@@ -24,6 +24,7 @@
 - Edit a particular animal's details
 - Delete a particular animal from the database
 - Database seeded with sample animals
+- Search each endpoint for custom parameters (Search by breed, disposition, size etc. )
 - Pagination of results (Default of 2 results per page at a time)
 - Cross platform
   - Windows, macOS and Linux ready.
@@ -88,6 +89,10 @@ Example Queries:
 ## A Note On Pagination
 
 - To modify the default pagination of 2 results per page, append the following parameters: `pageSize=`. If you would like to skip to a certain page of results, use the `pageNumber=` parameter.
+
+## A Note on CORS
+
+CORS is a W3C standard that allows a server to relax the same-origin policy. CORS relaxes security. It allows a server to explicitly allow some cross-origin requests and can be customized in the Startup.cs file. An API is less safe by allowing CORS but it allows greater flexibility. For more information, see the [Microsoft Documentation](https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-3.1).
 
 ## Reach Out
 
