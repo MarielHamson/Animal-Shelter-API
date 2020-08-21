@@ -100,6 +100,8 @@ This software uses the following technologies:
 - Entity
 - MySQL / MySQL Workbench
 - Okta tokenization
+- Postman
+- Swagger
 
 ## Support
 
